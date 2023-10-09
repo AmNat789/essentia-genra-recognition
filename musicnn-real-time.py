@@ -86,24 +86,7 @@ act_buffer = np.zeros([n_classes, display_size])
 
 pool.clear()
 
-# f, ax = plt.subplots(1, 2, figsize=[9.6, 7])
-# f.canvas.draw()
-#
-# ax[0].set_title('Mel Spectrogram')
-# img_mel = ax[0].imshow(mel_buffer, aspect='auto',
-#                        origin='lower', vmin=0, vmax=6)
-# ax[0].set_xticks([])
-#
-# ax[1].set_title('Activations')
-# img_act = ax[1].matshow(act_buffer, aspect='0.5', vmin=0, vmax=1)
-# ax[1].set_xticks([])
-# ax[1].yaxis.set_ticks_position('right')
-# plt.yticks(np.arange(n_classes), classes, fontsize=6)
-
 # Capture and process the speakers loopback.
 with sc.all_microphones(include_loopback=True)[0].recorder(samplerate=sample_rate) as mic:
     while True:
         callback(mic.record(numframes=buffer_size).mean(axis=1))
-
-# with sc.all_microphones(include_loopback=True)[0].recorder(samplerate=sample_rate) as mic:
-#     callback(mic.record(numframes=buffer_size).mean(axis=1))
